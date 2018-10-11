@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import Util from 'util/util';
+import User from 'user/user-service';
 import './login.css';
 
 
@@ -9,7 +10,8 @@ class Login extends Component{
         super();
         this.state={
             username:'',
-            password:''
+            password:'',
+            redirect:Util.getUrlParam('redirect')||'/'
         }
     }
 
@@ -24,18 +26,21 @@ onInputChange(e){
 }
 
 onSubmit(){
-    Util.request({
-        type:'post',
-        url:'/manage/user/login.do',
-        data:{
-            username: this.state.username,
-            password :this.state.password
-        }
-    }).then((res)=>{
-
-    },(err)=>{
-
-    });
+    let loginInfo={
+        username: this.state.username,
+        password :this.state.password
+    },checkResult=User.checkLoginInfo(loginInfo);
+    if(checkResult.status){
+        User.login(loginInfo).then((res)=>{
+            this.props.history.push(this.state.redirect);
+        },(errMsg)=>{
+            Util.errorTips(errMsg);
+        });
+    }
+    else{
+        Util.errorTips(checkResult.msg);
+    }
+  
 }
     render(){
         return (

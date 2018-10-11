@@ -24,9 +24,21 @@ class Util {
         });
     }
 
-    doLogin(){
+    static doLogin(){
         window.location.href='/login?redirect='+encodeURIComponent(window.location.pathname);
     }
+
+    static getUrlParam(name){
+        let queryString =window.location.search.split('?')[1] || "",
+             reg =new RegExp("(^|&)"+name+'=([^&]*)(&|$)'),
+             result =queryString.match(reg);
+             return result ?decodeURIComponent(result[2]) : null;
+    }
+
+    static errorTips(errMsg){
+        alert(errMsg||'好像哪里不对了');
+    }
+
 
 }
 
