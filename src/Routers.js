@@ -8,16 +8,27 @@ import {
 
 import Layout from 'component/layout/layout';
 import Home from 'page/Home/index';
+import Login from 'page/Login/login'
 class Routers extends Component {
     render() {
+
+        let LayoutRouter = (
+            <Layout>
+                <Switch>
+                    <Route exact path='/' component={Home}></Route>
+                    <Redirect from='*' to='/' ></Redirect>
+                </Switch>
+            </Layout>
+
+        );
+
         return (
             <Router>
-                <Layout>
-                    <Switch>
-                        <Route exact path='/' component={Home}></Route>
-                        <Redirect from='*' to='/' ></Redirect>
-                    </Switch>
-                </Layout>
+                <Switch>
+                <Route exact path='/login' component={Login}></Route>
+                    <Route path="/" render={props => LayoutRouter} />
+                    
+                </Switch>
             </Router>
         );
     }
