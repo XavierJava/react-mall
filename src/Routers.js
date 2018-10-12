@@ -3,12 +3,12 @@ import {
     BrowserRouter as Router,
     Route,
     Switch,
-    Redirect
 } from 'react-router-dom';
 
 import Layout from 'component/layout/layout';
 import Home from 'page/Home/index';
 import Login from 'page/Login/login'
+import ErrorPage from 'page/Error/error'
 class Routers extends Component {
     render() {
 
@@ -16,7 +16,7 @@ class Routers extends Component {
             <Layout>
                 <Switch>
                     <Route exact path='/' component={Home}></Route>
-                    <Redirect from='*' to='/' ></Redirect>
+                    <Route component={ErrorPage}/>                    
                 </Switch>
             </Layout>
 
