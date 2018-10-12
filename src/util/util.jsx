@@ -9,16 +9,16 @@ class Util {
                 dataType: param.dataType || 'json',
                 data: param.data || null,
                 success(res) {
-                  if(0===res.state){
+                  if(0=== res.status){
                       typeof resolve ==='function' &&  resolve(res.data,res.msg);
-                  }else if(10===res.state){
+                  }else if(10=== res.status){
                     this.doLogin()
                   }else{
-                    typeof reject ==='function' &&  resolve(res.msg||res.data);
+                    typeof reject ==='function' &&  reject(res.msg||res.data);
                   }
                 },
                 error(err) {
-                    typeof reject ==='function' &&  resolve(err.statusText);
+                    typeof reject ==='function' &&  reject(err.statusText);
                 }
             });
         });

@@ -15,6 +15,9 @@ class Login extends Component{
         }
     }
 
+    componentWillMount(){
+        document.title='登陆'
+    }
 onInputChange(e){
     let inputName=e.target.name,
         inputValue=e.target.value;
@@ -42,6 +45,11 @@ onSubmit(){
     }
   
 }
+onInputKeyup(e){
+    if(e.keyCode===13){
+        this.onSubmit();
+    }
+}
     render(){
         return (
         <div className="col-md-4 col-md-offset-4">
@@ -54,6 +62,7 @@ onSubmit(){
                             name="username"
                             className="form-control"
                             placeholder="请输入用户名" 
+                            onKeyUp={e=>this.onInputKeyup(e)}
                             onChange={e => this.onInputChange(e)}
                           />
                     </div>
@@ -62,6 +71,7 @@ onSubmit(){
                             name="password"
                             className="form-control" 
                             placeholder="请输入密码" 
+                            onKeyUp={e=>this.onInputKeyup(e)}
                             onChange={e => this.onInputChange(e)}
                            />
                     </div>
