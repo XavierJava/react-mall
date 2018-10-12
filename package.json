@@ -95,9 +95,13 @@
     "extends": "react-app"
   },
   "proxy": {
+    "/user/logout.do": {
+      "target": "http://admintest.happymmall.com",
+      "changeOrigin": true
+    },
     "/manage": {
-    "target":  "http://admintest.happymmall.com",
-    "changeOrigin": true
+      "target": "http://admintest.happymmall.com",
+      "changeOrigin": true
     }
-    }
+  }
 }

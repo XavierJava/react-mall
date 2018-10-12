@@ -33,6 +33,13 @@ class User{
             msg:'验证通过'
         }
     }
+
+    static logout(){
+        return Util.request({
+            type:'post',
+            url:'/user/logout.do'
+        });
+    }
 }
 
 

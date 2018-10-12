@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
 import { Link }    from 'react-router-dom';
+import Util from 'util/util';
+import User from 'user/user-service';
 class NavTop extends Component {
+    constructor(){
+        super();
+        this.state={
+            username:Util.getStorage('userInfo').username||''
+        }
+    }
+
+    onLogout(){
+        User.logout().then(res=>{
+            Util.removeStorage('userInfo');
+            window.location.href='/login';
+        },errMsg=>{
+            Util.errorTips(errMsg)
+        });
+    }
 
     render() {
         return (
@@ -13,15 +30,18 @@ class NavTop extends Component {
                 <li className="dropdown">
                     <a className="dropdown-toggle" >
                         <i className="fa fa-user fa-fw"></i>
-                        
-                             <span>欢迎</span>
-                            <span>欢迎您</span>
+                        {
+                            this.state.username
+                            ?<span>欢迎，{this.state.username}</span>
+                            :<span>欢迎您</span>
+                        }
+                             
                        
                         <i className="fa fa-caret-down"></i>
                     </a>
                     <ul className="dropdown-menu dropdown-user">
                         <li>
-                            <a >
+                            <a onClick={() => {this.onLogout()}}>
                                 <i className="fa fa-sign-out fa-fw"></i>
                                 <span>退出登录</span>
                             </a>

@@ -35,6 +35,7 @@ onSubmit(){
     },checkResult=User.checkLoginInfo(loginInfo);
     if(checkResult.status){
         User.login(loginInfo).then((res)=>{
+           Util.setStorage('userInfo',res);
             this.props.history.push(this.state.redirect);
         },(errMsg)=>{
             Util.errorTips(errMsg);
