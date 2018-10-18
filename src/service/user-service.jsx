@@ -40,6 +40,18 @@ class User{
             url:'/user/logout.do'
         });
     }
+
+
+    static getUserList(pageNum){
+        return Util.request({
+            type    : 'post',
+            url     :  '/manage/user/list.do',
+            data    : {
+                pageNum:pageNum
+            }
+        });
+
+    }
 }
 
 
